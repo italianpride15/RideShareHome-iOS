@@ -15,6 +15,7 @@
 		CFA8B8841E91CF40006BE80E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFA8B8821E91CF40006BE80E /* LaunchScreen.storyboard */; };
 		CFA8B88F1E91CF40006BE80E /* PrivyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B88E1E91CF40006BE80E /* PrivyTests.m */; };
 		CFA8B89A1E91CF40006BE80E /* PrivyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8991E91CF40006BE80E /* PrivyUITests.m */; };
+		CFA8B8AE1E91DD15006BE80E /* RideServiceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8AD1E91DD15006BE80E /* RideServiceCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,9 @@
 		CFA8B8951E91CF40006BE80E /* PrivyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFA8B8991E91CF40006BE80E /* PrivyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivyUITests.m; sourceTree = "<group>"; };
 		CFA8B89B1E91CF40006BE80E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFA8B8AB1E91D7ED006BE80E /* RideShareModelsProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RideShareModelsProtocol.h; sourceTree = "<group>"; };
+		CFA8B8AC1E91DD15006BE80E /* RideServiceCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RideServiceCollectionViewCell.h; sourceTree = "<group>"; };
+		CFA8B8AD1E91DD15006BE80E /* RideServiceCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RideServiceCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 		CFA8B8731E91CF40006BE80E /* Privy */ = {
 			isa = PBXGroup;
 			children = (
+				CFA8B8AA1E91D7C0006BE80E /* Models */,
 				CFA8B8771E91CF40006BE80E /* AppDelegate.h */,
 				CFA8B8781E91CF40006BE80E /* AppDelegate.m */,
 				CFA8B87A1E91CF40006BE80E /* ViewController.h */,
@@ -110,6 +115,8 @@
 				CFA8B8821E91CF40006BE80E /* LaunchScreen.storyboard */,
 				CFA8B8851E91CF40006BE80E /* Info.plist */,
 				CFA8B8741E91CF40006BE80E /* Supporting Files */,
+				CFA8B8AC1E91DD15006BE80E /* RideServiceCollectionViewCell.h */,
+				CFA8B8AD1E91DD15006BE80E /* RideServiceCollectionViewCell.m */,
 			);
 			path = Privy;
 			sourceTree = "<group>";
@@ -138,6 +145,14 @@
 				CFA8B89B1E91CF40006BE80E /* Info.plist */,
 			);
 			path = PrivyUITests;
+			sourceTree = "<group>";
+		};
+		CFA8B8AA1E91D7C0006BE80E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFA8B8AB1E91D7ED006BE80E /* RideShareModelsProtocol.h */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +293,7 @@
 			files = (
 				CFA8B87C1E91CF40006BE80E /* ViewController.m in Sources */,
 				CFA8B8791E91CF40006BE80E /* AppDelegate.m in Sources */,
+				CFA8B8AE1E91DD15006BE80E /* RideServiceCollectionViewCell.m in Sources */,
 				CFA8B8761E91CF40006BE80E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

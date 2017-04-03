@@ -7,8 +7,15 @@
 //
 
 #import "ViewController.h"
+#import "RideShareModelsProtocol.h"
 
-@interface ViewController ()
+static NSString * const kCollectionViewCellReuseId = @"collectionViewCellReuseId";
+
+@interface ViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+@property (strong, nonatomic) NSArray<RideShareModelsProtocol> *models;
 
 @end
 
@@ -16,14 +23,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.collectionView.delegate = self;
 }
 
+#pragma mark - UICollectionViewDataSource
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [self.models count];
 }
+
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView dequeueReusableSupplementaryViewOfKind:nil withReuseIdentifier:nil forIndexPath:nil];
+    return cell;
+}
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//}
 
 
 @end
