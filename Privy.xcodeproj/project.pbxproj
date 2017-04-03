@@ -1,0 +1,539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CFA8B8761E91CF40006BE80E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8751E91CF40006BE80E /* main.m */; };
+		CFA8B8791E91CF40006BE80E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8781E91CF40006BE80E /* AppDelegate.m */; };
+		CFA8B87C1E91CF40006BE80E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B87B1E91CF40006BE80E /* ViewController.m */; };
+		CFA8B87F1E91CF40006BE80E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFA8B87D1E91CF40006BE80E /* Main.storyboard */; };
+		CFA8B8811E91CF40006BE80E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFA8B8801E91CF40006BE80E /* Assets.xcassets */; };
+		CFA8B8841E91CF40006BE80E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFA8B8821E91CF40006BE80E /* LaunchScreen.storyboard */; };
+		CFA8B88F1E91CF40006BE80E /* PrivyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B88E1E91CF40006BE80E /* PrivyTests.m */; };
+		CFA8B89A1E91CF40006BE80E /* PrivyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8991E91CF40006BE80E /* PrivyUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CFA8B88B1E91CF40006BE80E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFA8B8691E91CF3F006BE80E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFA8B8701E91CF3F006BE80E;
+			remoteInfo = Privy;
+		};
+		CFA8B8961E91CF40006BE80E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFA8B8691E91CF3F006BE80E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFA8B8701E91CF3F006BE80E;
+			remoteInfo = Privy;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CFA8B8711E91CF40006BE80E /* Privy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Privy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFA8B8751E91CF40006BE80E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CFA8B8771E91CF40006BE80E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CFA8B8781E91CF40006BE80E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CFA8B87A1E91CF40006BE80E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CFA8B87B1E91CF40006BE80E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CFA8B87E1E91CF40006BE80E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CFA8B8801E91CF40006BE80E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CFA8B8831E91CF40006BE80E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CFA8B8851E91CF40006BE80E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFA8B88A1E91CF40006BE80E /* PrivyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFA8B88E1E91CF40006BE80E /* PrivyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivyTests.m; sourceTree = "<group>"; };
+		CFA8B8901E91CF40006BE80E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFA8B8951E91CF40006BE80E /* PrivyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFA8B8991E91CF40006BE80E /* PrivyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivyUITests.m; sourceTree = "<group>"; };
+		CFA8B89B1E91CF40006BE80E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CFA8B86E1E91CF3F006BE80E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA8B8871E91CF40006BE80E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA8B8921E91CF40006BE80E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CFA8B8681E91CF3F006BE80E = {
+			isa = PBXGroup;
+			children = (
+				CFA8B8731E91CF40006BE80E /* Privy */,
+				CFA8B88D1E91CF40006BE80E /* PrivyTests */,
+				CFA8B8981E91CF40006BE80E /* PrivyUITests */,
+				CFA8B8721E91CF40006BE80E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CFA8B8721E91CF40006BE80E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CFA8B8711E91CF40006BE80E /* Privy.app */,
+				CFA8B88A1E91CF40006BE80E /* PrivyTests.xctest */,
+				CFA8B8951E91CF40006BE80E /* PrivyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CFA8B8731E91CF40006BE80E /* Privy */ = {
+			isa = PBXGroup;
+			children = (
+				CFA8B8771E91CF40006BE80E /* AppDelegate.h */,
+				CFA8B8781E91CF40006BE80E /* AppDelegate.m */,
+				CFA8B87A1E91CF40006BE80E /* ViewController.h */,
+				CFA8B87B1E91CF40006BE80E /* ViewController.m */,
+				CFA8B87D1E91CF40006BE80E /* Main.storyboard */,
+				CFA8B8801E91CF40006BE80E /* Assets.xcassets */,
+				CFA8B8821E91CF40006BE80E /* LaunchScreen.storyboard */,
+				CFA8B8851E91CF40006BE80E /* Info.plist */,
+				CFA8B8741E91CF40006BE80E /* Supporting Files */,
+			);
+			path = Privy;
+			sourceTree = "<group>";
+		};
+		CFA8B8741E91CF40006BE80E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CFA8B8751E91CF40006BE80E /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CFA8B88D1E91CF40006BE80E /* PrivyTests */ = {
+			isa = PBXGroup;
+			children = (
+				CFA8B88E1E91CF40006BE80E /* PrivyTests.m */,
+				CFA8B8901E91CF40006BE80E /* Info.plist */,
+			);
+			path = PrivyTests;
+			sourceTree = "<group>";
+		};
+		CFA8B8981E91CF40006BE80E /* PrivyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CFA8B8991E91CF40006BE80E /* PrivyUITests.m */,
+				CFA8B89B1E91CF40006BE80E /* Info.plist */,
+			);
+			path = PrivyUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CFA8B8701E91CF3F006BE80E /* Privy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFA8B89E1E91CF40006BE80E /* Build configuration list for PBXNativeTarget "Privy" */;
+			buildPhases = (
+				CFA8B86D1E91CF3F006BE80E /* Sources */,
+				CFA8B86E1E91CF3F006BE80E /* Frameworks */,
+				CFA8B86F1E91CF3F006BE80E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Privy;
+			productName = Privy;
+			productReference = CFA8B8711E91CF40006BE80E /* Privy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CFA8B8891E91CF40006BE80E /* PrivyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFA8B8A11E91CF40006BE80E /* Build configuration list for PBXNativeTarget "PrivyTests" */;
+			buildPhases = (
+				CFA8B8861E91CF40006BE80E /* Sources */,
+				CFA8B8871E91CF40006BE80E /* Frameworks */,
+				CFA8B8881E91CF40006BE80E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFA8B88C1E91CF40006BE80E /* PBXTargetDependency */,
+			);
+			name = PrivyTests;
+			productName = PrivyTests;
+			productReference = CFA8B88A1E91CF40006BE80E /* PrivyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CFA8B8941E91CF40006BE80E /* PrivyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFA8B8A41E91CF40006BE80E /* Build configuration list for PBXNativeTarget "PrivyUITests" */;
+			buildPhases = (
+				CFA8B8911E91CF40006BE80E /* Sources */,
+				CFA8B8921E91CF40006BE80E /* Frameworks */,
+				CFA8B8931E91CF40006BE80E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFA8B8971E91CF40006BE80E /* PBXTargetDependency */,
+			);
+			name = PrivyUITests;
+			productName = PrivyUITests;
+			productReference = CFA8B8951E91CF40006BE80E /* PrivyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CFA8B8691E91CF3F006BE80E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Nathan Pantaleo";
+				TargetAttributes = {
+					CFA8B8701E91CF3F006BE80E = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 75T4FABWUQ;
+						ProvisioningStyle = Automatic;
+					};
+					CFA8B8891E91CF40006BE80E = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 75T4FABWUQ;
+						ProvisioningStyle = Automatic;
+						TestTargetID = CFA8B8701E91CF3F006BE80E;
+					};
+					CFA8B8941E91CF40006BE80E = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 75T4FABWUQ;
+						ProvisioningStyle = Automatic;
+						TestTargetID = CFA8B8701E91CF3F006BE80E;
+					};
+				};
+			};
+			buildConfigurationList = CFA8B86C1E91CF3F006BE80E /* Build configuration list for PBXProject "Privy" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CFA8B8681E91CF3F006BE80E;
+			productRefGroup = CFA8B8721E91CF40006BE80E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CFA8B8701E91CF3F006BE80E /* Privy */,
+				CFA8B8891E91CF40006BE80E /* PrivyTests */,
+				CFA8B8941E91CF40006BE80E /* PrivyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CFA8B86F1E91CF3F006BE80E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFA8B8841E91CF40006BE80E /* LaunchScreen.storyboard in Resources */,
+				CFA8B8811E91CF40006BE80E /* Assets.xcassets in Resources */,
+				CFA8B87F1E91CF40006BE80E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA8B8881E91CF40006BE80E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA8B8931E91CF40006BE80E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CFA8B86D1E91CF3F006BE80E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFA8B87C1E91CF40006BE80E /* ViewController.m in Sources */,
+				CFA8B8791E91CF40006BE80E /* AppDelegate.m in Sources */,
+				CFA8B8761E91CF40006BE80E /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA8B8861E91CF40006BE80E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFA8B88F1E91CF40006BE80E /* PrivyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFA8B8911E91CF40006BE80E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFA8B89A1E91CF40006BE80E /* PrivyUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CFA8B88C1E91CF40006BE80E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFA8B8701E91CF3F006BE80E /* Privy */;
+			targetProxy = CFA8B88B1E91CF40006BE80E /* PBXContainerItemProxy */;
+		};
+		CFA8B8971E91CF40006BE80E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFA8B8701E91CF3F006BE80E /* Privy */;
+			targetProxy = CFA8B8961E91CF40006BE80E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CFA8B87D1E91CF40006BE80E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CFA8B87E1E91CF40006BE80E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CFA8B8821E91CF40006BE80E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CFA8B8831E91CF40006BE80E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CFA8B89C1E91CF40006BE80E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CFA8B89D1E91CF40006BE80E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CFA8B89F1E91CF40006BE80E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 75T4FABWUQ;
+				INFOPLIST_FILE = Privy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nathanpantaleo.Privy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CFA8B8A01E91CF40006BE80E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 75T4FABWUQ;
+				INFOPLIST_FILE = Privy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nathanpantaleo.Privy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		CFA8B8A21E91CF40006BE80E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 75T4FABWUQ;
+				INFOPLIST_FILE = PrivyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nathanpantaleo.PrivyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Privy.app/Privy";
+			};
+			name = Debug;
+		};
+		CFA8B8A31E91CF40006BE80E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 75T4FABWUQ;
+				INFOPLIST_FILE = PrivyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nathanpantaleo.PrivyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Privy.app/Privy";
+			};
+			name = Release;
+		};
+		CFA8B8A51E91CF40006BE80E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 75T4FABWUQ;
+				INFOPLIST_FILE = PrivyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nathanpantaleo.PrivyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Privy;
+			};
+			name = Debug;
+		};
+		CFA8B8A61E91CF40006BE80E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 75T4FABWUQ;
+				INFOPLIST_FILE = PrivyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nathanpantaleo.PrivyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Privy;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CFA8B86C1E91CF3F006BE80E /* Build configuration list for PBXProject "Privy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFA8B89C1E91CF40006BE80E /* Debug */,
+				CFA8B89D1E91CF40006BE80E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFA8B89E1E91CF40006BE80E /* Build configuration list for PBXNativeTarget "Privy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFA8B89F1E91CF40006BE80E /* Debug */,
+				CFA8B8A01E91CF40006BE80E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CFA8B8A11E91CF40006BE80E /* Build configuration list for PBXNativeTarget "PrivyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFA8B8A21E91CF40006BE80E /* Debug */,
+				CFA8B8A31E91CF40006BE80E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CFA8B8A41E91CF40006BE80E /* Build configuration list for PBXNativeTarget "PrivyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFA8B8A51E91CF40006BE80E /* Debug */,
+				CFA8B8A61E91CF40006BE80E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CFA8B8691E91CF3F006BE80E /* Project object */;
+}
