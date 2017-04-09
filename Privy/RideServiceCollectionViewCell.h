@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RideShareModelsProtocol.h"
 
 @interface RideServiceCollectionViewCell : UICollectionViewCell
+
+- (void)configureCellForRideShareModel:(NSObject<RideShareModelsProtocol> *)model;
 
 @end

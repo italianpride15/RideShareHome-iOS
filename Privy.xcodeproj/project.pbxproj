@@ -16,6 +16,10 @@
 		CFA8B88F1E91CF40006BE80E /* PrivyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B88E1E91CF40006BE80E /* PrivyTests.m */; };
 		CFA8B89A1E91CF40006BE80E /* PrivyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8991E91CF40006BE80E /* PrivyUITests.m */; };
 		CFA8B8AE1E91DD15006BE80E /* RideServiceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8AD1E91DD15006BE80E /* RideServiceCollectionViewCell.m */; };
+		CFA8B8B11E91EA91006BE80E /* UberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8B01E91EA91006BE80E /* UberModel.m */; };
+		CFA8B8B41E91EAA3006BE80E /* LyftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8B31E91EAA3006BE80E /* LyftModel.m */; };
+		CFA8B8B71E932963006BE80E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8B61E932963006BE80E /* UserModel.m */; };
+		CFA8B8BA1E98377B006BE80E /* RideResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8B91E98377B006BE80E /* RideResponseModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,14 @@
 		CFA8B8AB1E91D7ED006BE80E /* RideShareModelsProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RideShareModelsProtocol.h; sourceTree = "<group>"; };
 		CFA8B8AC1E91DD15006BE80E /* RideServiceCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RideServiceCollectionViewCell.h; sourceTree = "<group>"; };
 		CFA8B8AD1E91DD15006BE80E /* RideServiceCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RideServiceCollectionViewCell.m; sourceTree = "<group>"; };
+		CFA8B8AF1E91EA91006BE80E /* UberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UberModel.h; sourceTree = "<group>"; };
+		CFA8B8B01E91EA91006BE80E /* UberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UberModel.m; sourceTree = "<group>"; };
+		CFA8B8B21E91EAA3006BE80E /* LyftModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyftModel.h; sourceTree = "<group>"; };
+		CFA8B8B31E91EAA3006BE80E /* LyftModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyftModel.m; sourceTree = "<group>"; };
+		CFA8B8B51E932963006BE80E /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		CFA8B8B61E932963006BE80E /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		CFA8B8B81E98377B006BE80E /* RideResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RideResponseModel.h; sourceTree = "<group>"; };
+		CFA8B8B91E98377B006BE80E /* RideResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RideResponseModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +117,7 @@
 		CFA8B8731E91CF40006BE80E /* Privy */ = {
 			isa = PBXGroup;
 			children = (
+				CFA8B8BB1E983D6B006BE80E /* Cells */,
 				CFA8B8AA1E91D7C0006BE80E /* Models */,
 				CFA8B8771E91CF40006BE80E /* AppDelegate.h */,
 				CFA8B8781E91CF40006BE80E /* AppDelegate.m */,
@@ -115,8 +128,6 @@
 				CFA8B8821E91CF40006BE80E /* LaunchScreen.storyboard */,
 				CFA8B8851E91CF40006BE80E /* Info.plist */,
 				CFA8B8741E91CF40006BE80E /* Supporting Files */,
-				CFA8B8AC1E91DD15006BE80E /* RideServiceCollectionViewCell.h */,
-				CFA8B8AD1E91DD15006BE80E /* RideServiceCollectionViewCell.m */,
 			);
 			path = Privy;
 			sourceTree = "<group>";
@@ -151,8 +162,25 @@
 			isa = PBXGroup;
 			children = (
 				CFA8B8AB1E91D7ED006BE80E /* RideShareModelsProtocol.h */,
+				CFA8B8AF1E91EA91006BE80E /* UberModel.h */,
+				CFA8B8B01E91EA91006BE80E /* UberModel.m */,
+				CFA8B8B21E91EAA3006BE80E /* LyftModel.h */,
+				CFA8B8B31E91EAA3006BE80E /* LyftModel.m */,
+				CFA8B8B51E932963006BE80E /* UserModel.h */,
+				CFA8B8B61E932963006BE80E /* UserModel.m */,
+				CFA8B8B81E98377B006BE80E /* RideResponseModel.h */,
+				CFA8B8B91E98377B006BE80E /* RideResponseModel.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		CFA8B8BB1E983D6B006BE80E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CFA8B8AC1E91DD15006BE80E /* RideServiceCollectionViewCell.h */,
+				CFA8B8AD1E91DD15006BE80E /* RideServiceCollectionViewCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,9 +319,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFA8B8B11E91EA91006BE80E /* UberModel.m in Sources */,
 				CFA8B87C1E91CF40006BE80E /* ViewController.m in Sources */,
+				CFA8B8BA1E98377B006BE80E /* RideResponseModel.m in Sources */,
+				CFA8B8B71E932963006BE80E /* UserModel.m in Sources */,
 				CFA8B8791E91CF40006BE80E /* AppDelegate.m in Sources */,
 				CFA8B8AE1E91DD15006BE80E /* RideServiceCollectionViewCell.m in Sources */,
+				CFA8B8B41E91EAA3006BE80E /* LyftModel.m in Sources */,
 				CFA8B8761E91CF40006BE80E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class UserModel;
+
 @protocol RideShareModelsProtocol <NSObject>
 
+@required
+- (NSArray *)availableRidesFromLowestPrice;
 - (NSUInteger)numberOfAvailableServices;
++ (NSString *)getRequestStringForUser:(UserModel *)user;
++ (NSString *)authorizationToken;
 
 @end

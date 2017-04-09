@@ -7,7 +7,6 @@
 //
 
 #import "RideServiceCollectionViewCell.h"
-#import "RideShareModelsProtocol.h"
 
 static NSString * kRideShareModelTableViewCellReuseId = @"rideShareModelTableViewCellReuseId";
 
@@ -32,7 +31,7 @@ static NSString * kRideShareModelTableViewCellReuseId = @"rideShareModelTableVie
     return self;
 }
 
-- (void)configureCellWithModel:(NSObject<RideShareModelsProtocol> *)model {
+- (void)configureCellForRideShareModel:(NSObject<RideShareModelsProtocol> *)model {
     self.model = model;
     
 }
