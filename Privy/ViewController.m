@@ -44,38 +44,27 @@ static NSString * const kRideServiceCollectionViewCellReuseId = @"rideServiceCol
 
 - (void)refreshData {
     [self updateUserDestinationAddress];
-    [self makeRideShareDataRequestsForUser];
+//    [self makeRideShareDataRequestsForUser];
 }
 
 - (void)updateUserDestinationAddress {
-    self.user.destinationLatitude = @"37.7816977";
-    self.user.destinationLongitude = @"-122.410014";
+//    self.user.destinationLatitude = @"37.7816977";
+//    self.user.destinationLongitude = @"-122.410014";
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:@"28 6th St, San Francisco, CA 94103" completionHandler:^(NSArray* placemarks, NSError* error) {
+        for (CLPlacemark* placemark in placemarks) {
+            self.user.destinationLatitude = [NSString stringWithFormat:@"%.4f", placemark.location.coordinate.latitude];
+            self.user.destinationLongitude = [NSString stringWithFormat:@"%.4f", placemark.location.coordinate.longitude];
+        }
+    }];
 }
 
 - (void)makeRideShareDataRequestsForUser {
     
     __weak typeof(self) weakSelf = self;
-
-    // Make Uber Request
-    NSString *uberDataUrl = [UberModel getRequestStringForUser:self.user];
-    NSURL *uberUrl = [NSURL URLWithString:uberDataUrl];
     
-    NSMutableURLRequest *uberRequest = [[NSMutableURLRequest alloc] initWithURL:uberUrl];
-    [uberRequest setValue:[UberModel authorizationToken] forHTTPHeaderField:@"Authorization"];
-    [uberRequest setHTTPMethod:@"GET"];
-
-    NSURLSessionDataTask *uberTask = [[NSURLSession sharedSession]
-                                      dataTaskWithRequest:uberRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                              if (error) {
-                                                  [weakSelf handleError:error];
-                                              } else {
-                                                  UberModel *uberModel = [[UberModel alloc] initWithResponse:response];
-                                                  [weakSelf.models addObject:uberModel];
-                                              }
-                                          }];
-    [uberTask resume];
- 
-    // Make Lyft Request
+    // Create Lyft Request
     NSString *lyftDataUrl = [LyftModel getRequestStringForUser:self.user];
     NSURL *lyftUrl = [NSURL URLWithString:lyftDataUrl];
     
@@ -85,14 +74,42 @@ static NSString * const kRideServiceCollectionViewCellReuseId = @"rideServiceCol
     
     NSURLSessionDataTask *lyftTask = [[NSURLSession sharedSession]
                                       dataTaskWithRequest:lyftRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                          
                                           if (error) {
                                               [weakSelf handleError:error];
                                           } else {
-                                              LyftModel *lyftModel = [[LyftModel alloc] initWithResponse:response];
+                                              NSDictionary * json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                              LyftModel *lyftModel = [[LyftModel alloc] initWithResponse:json];
                                               [weakSelf.models addObject:lyftModel];
                                           }
+                                          
+                                          if ([weakSelf.models count] > 0) {
+                                              [self.collectionView reloadData];
+                                          }
                                       }];
-    [lyftTask resume];
+    
+    // Create Uber Request
+    NSString *uberDataUrl = [UberModel getRequestStringForUser:self.user];
+    NSURL *uberUrl = [NSURL URLWithString:uberDataUrl];
+    
+    NSMutableURLRequest *uberRequest = [[NSMutableURLRequest alloc] initWithURL:uberUrl];
+    [uberRequest setValue:[UberModel authorizationToken] forHTTPHeaderField:@"Authorization"];
+    [uberRequest setHTTPMethod:@"GET"];
+
+    NSURLSessionDataTask *uberTask = [[NSURLSession sharedSession]
+                                      dataTaskWithRequest:uberRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                          
+                                              if (error) {
+                                                  [weakSelf handleError:error];
+                                              } else {
+                                                  NSDictionary * json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                                                  UberModel *uberModel = [[UberModel alloc] initWithResponse:json];
+                                                  [weakSelf.models addObject:uberModel];
+                                              }
+                                          
+                                              [lyftTask resume];
+                                          }];
+    [uberTask resume];
 }
 
 - (void)handleError:(NSError *)error {

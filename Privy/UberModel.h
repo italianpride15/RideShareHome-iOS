@@ -13,6 +13,6 @@
 
 @interface UberModel : NSObject <RideShareModelsProtocol>
 
-- (instancetype)initWithResponse:(NSURLResponse *)response;
+- (instancetype)initWithResponse:(NSDictionary *)response;
 
 @end

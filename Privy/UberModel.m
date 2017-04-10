@@ -24,13 +24,27 @@ static NSString * const kQuery = @"uber://?client_id=XikKX8YmAoiTaE4PxmvKK2xImKt
 
 @implementation UberModel
 
-- (instancetype)initWithResponse:(NSURLResponse *)response {
+- (instancetype)initWithResponse:(NSDictionary *)response {
     self = [super init];
     
     if (self) {
-        NSMutableOrderedSet *sortedRides = [[NSMutableOrderedSet alloc] initWithArray:self.rides];
-        // add rides to array
-        self.rides = [sortedRides array];
+        NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *rideResponse in [response objectForKey:@"prices"]) {
+            if (![[rideResponse valueForKey:@"estimate"] isEqualToString:@"Metered"]) {
+                RideResponseModel * ride = [[RideResponseModel alloc] init];
+                ride.rideName = [rideResponse valueForKey:@"display_name"];
+                ride.rideType = [rideResponse valueForKey:@"display_name"];
+                ride.multiplier = [rideResponse valueForKey:@"surge_multiplier"];
+                
+                NSArray *estimateRange = [[rideResponse valueForKey:@"estimate"] componentsSeparatedByString:@"-"];
+                ride.estimatedCost = @(([[[estimateRange objectAtIndex:0] substringFromIndex:1] doubleValue] + [[estimateRange objectAtIndex:1] doubleValue]) / 2);
+                [sortedArray addObject:ride];
+            }
+        }
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"estimatedCost"
+                                                     ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        self.rides = [sortedArray sortedArrayUsingDescriptors:sortDescriptors];
     }
     return self;
 }

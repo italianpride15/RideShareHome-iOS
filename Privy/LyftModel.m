@@ -22,13 +22,26 @@ static NSString * const kLyftClientId = @"1-HcRoLe-9Vd";
 
 @implementation LyftModel
 
-- (instancetype)initWithResponse:(NSURLResponse *)response {
+- (instancetype)initWithResponse:(NSDictionary *)response {
     self = [super init];
     
     if (self) {
-        NSMutableOrderedSet *sortedRides = [[NSMutableOrderedSet alloc] initWithArray:self.rides];
-        //sort array
-        self.rides = [sortedRides array];
+        NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *rideResponse in [response objectForKey:@"cost_estimates"]) {
+            RideResponseModel * ride = [[RideResponseModel alloc] init];
+            ride.rideName = [rideResponse valueForKey:@"display_name"];
+            ride.rideType = [rideResponse valueForKey:@"ride_type"];
+            ride.multiplier = [[rideResponse valueForKey:@"primetime_percentage"] isEqualToString:@"0%"] ? nil : [rideResponse valueForKey:@"primetime_percentage"];
+            NSInteger costInCents = [[rideResponse objectForKey:@"estimated_cost_cents_max"] integerValue];
+            NSInteger dollars = costInCents / 100;
+            double cents = (costInCents % 100) / 100.0;
+            ride.estimatedCost = @(dollars + cents);
+            [sortedArray addObject:ride];
+        }
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"estimatedCost"
+                                                                       ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        self.rides = [sortedArray sortedArrayUsingDescriptors:sortDescriptors];
     }
     return self;
 }
