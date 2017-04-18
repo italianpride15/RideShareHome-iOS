@@ -7,6 +7,7 @@
 //
 
 #import "RideServiceCollectionViewCell.h"
+#import "RideResponseModel.h"
 
 static NSString * kRideShareModelTableViewCellReuseId = @"rideShareModelTableViewCellReuseId";
 
@@ -21,19 +22,16 @@ static NSString * kRideShareModelTableViewCellReuseId = @"rideShareModelTableVie
 
 @implementation RideServiceCollectionViewCell
 
-- (instancetype)init {
-    self = [super init];
-    
-    if (self) {
-        _tableView.delegate = self;
-        _tableView.estimatedRowHeight = 100;
-    }
-    return self;
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.estimatedRowHeight = 100;
 }
 
 - (void)configureCellForRideShareModel:(NSObject<RideShareModelsProtocol> *)model {
     self.model = model;
-    
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -44,6 +42,10 @@ static NSString * kRideShareModelTableViewCellReuseId = @"rideShareModelTableVie
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRideShareModelTableViewCellReuseId forIndexPath:indexPath];
+    RideResponseModel *ride = [self.model.availableRidesFromLowestPrice objectAtIndex:indexPath.row];
+    cell.backgroundColor = [UIColor blueColor];
+    cell.textLabel.text = ride.rideName;
+    cell.detailTextLabel.text = [ride.estimatedCost stringValue];
     return cell;
 }
 

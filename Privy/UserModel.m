@@ -10,4 +10,8 @@
 
 @implementation UserModel
 
+- (BOOL)isModelComplete {
+    return (_currentLatitude && _currentLongitude && _destinationLatitude && _destinationLongitude);
+}
+
 @end

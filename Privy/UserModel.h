@@ -15,4 +15,6 @@
 @property (copy, nonatomic) NSString *destinationLatitude;
 @property (copy, nonatomic) NSString *destinationLongitude;
 
+- (BOOL)isModelComplete;
+
 @end

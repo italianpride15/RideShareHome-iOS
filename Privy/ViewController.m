@@ -16,6 +16,8 @@
 
 static NSString * const kRideServiceCollectionViewCellReuseId = @"rideServiceCollectionViewCellReuseId";
 
+static void * UserModelContext = &UserModelContext;
+
 @interface ViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -32,6 +34,7 @@ static NSString * const kRideServiceCollectionViewCellReuseId = @"rideServiceCol
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -40,11 +43,22 @@ static NSString * const kRideServiceCollectionViewCellReuseId = @"rideServiceCol
     
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
+    
+//    [self.user addObserver:self forKeyPath:NSStringFromSelector(@selector(currentLatitude)) options:0 context:UserModelContext];
+    [self.user addObserver:self forKeyPath:NSStringFromSelector(@selector(currentLongitude)) options:0 context:UserModelContext];
+//    [self.user addObserver:self forKeyPath:NSStringFromSelector(@selector(destinationLatitude)) options:0 context:UserModelContext];
+    [self.user addObserver:self forKeyPath:NSStringFromSelector(@selector(destinationLongitude)) options:0 context:UserModelContext];
+    
+    [self updateUserDestinationAddress];
 }
 
-- (void)refreshData {
-    [self updateUserDestinationAddress];
-//    [self makeRideShareDataRequestsForUser];
+- (void)dealloc {
+    @try {
+        [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(currentLatitude))  context:UserModelContext];
+        [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(currentLongitude))  context:UserModelContext];
+        [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(destinationLatitude))  context:UserModelContext];
+        [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(destinationLongitude))  context:UserModelContext];
+    } @catch (NSException * __unused exception){}
 }
 
 - (void)updateUserDestinationAddress {
@@ -84,7 +98,9 @@ static NSString * const kRideServiceCollectionViewCellReuseId = @"rideServiceCol
                                           }
                                           
                                           if ([weakSelf.models count] > 0) {
-                                              [self.collectionView reloadData];
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  [weakSelf.collectionView reloadData];
+                                              });
                                           }
                                       }];
     
@@ -125,7 +141,7 @@ static NSString * const kRideServiceCollectionViewCellReuseId = @"rideServiceCol
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     RideServiceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kRideServiceCollectionViewCellReuseId forIndexPath:indexPath];
-    
+    [cell configureCellForRideShareModel:[self.models objectAtIndex:indexPath.row]];
     return cell;
 }
 
@@ -135,13 +151,29 @@ static NSString * const kRideServiceCollectionViewCellReuseId = @"rideServiceCol
 //    
 //}
 
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context{
+    
+    if (context == UserModelContext) {
+        
+        if ([self.user isModelComplete]) {
+            [self makeRideShareDataRequestsForUser];
+        }
+    }
+}
+
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0) {
     CLLocation *currentLocation = [locations firstObject];
-    self.user.currentLatitude = [[NSNumber numberWithDouble:currentLocation.coordinate.latitude] stringValue];
-    self.user.currentLongitude = [[NSNumber numberWithDouble:currentLocation.coordinate.longitude] stringValue];
-    [self refreshData];
+    if (![self.user isModelComplete]) {
+        self.user.currentLatitude = [[NSNumber numberWithDouble:currentLocation.coordinate.latitude] stringValue];
+        self.user.currentLongitude = [[NSNumber numberWithDouble:currentLocation.coordinate.longitude] stringValue];
+    }
 }
 
 #pragma mark - Lazy Loaded Properties
