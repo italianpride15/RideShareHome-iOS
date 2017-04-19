@@ -21,20 +21,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jv-v4-YxG">
-                                <rect key="frame" x="166" y="100" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Privy Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="ElS-AR-rIT">
+                                <rect key="frame" x="88" y="203.5" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="NIj-J8-shW"/>
+                                    <constraint firstAttribute="height" constant="200" id="iYh-Cw-aat"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ride Intelligently" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prk-hD-9L1">
+                                <rect key="frame" x="124.5" y="411.5" width="126" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="prk-hD-9L1" firstAttribute="top" secondItem="ElS-AR-rIT" secondAttribute="bottom" constant="8" id="7fN-uO-YIH"/>
+                            <constraint firstItem="ElS-AR-rIT" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Dni-cg-L3l"/>
+                            <constraint firstItem="ElS-AR-rIT" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-30" id="Pqj-9f-NTU"/>
+                            <constraint firstItem="prk-hD-9L1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="pqk-nN-zxI"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Privy Icon.png" width="346" height="346"/>
+    </resources>
 </document>

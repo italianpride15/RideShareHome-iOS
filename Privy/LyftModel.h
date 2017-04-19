@@ -13,6 +13,6 @@
 
 @interface LyftModel : NSObject <RideShareModelsProtocol>
 
-- (instancetype)initWithResponse:(NSDictionary *)response;
+- (instancetype)initWithResponse:(NSDictionary *)response andUserModel:(UserModel *)user;
 
 @end

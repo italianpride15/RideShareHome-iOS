@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF0636611EA5AD81002802A8 /* Privy Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CF0636601EA5AD81002802A8 /* Privy Icon.png */; };
+		CF0636691EA5B63C002802A8 /* UberRideTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0636671EA5B63C002802A8 /* UberRideTableViewCell.m */; };
+		CF06366A1EA5B63C002802A8 /* UberRideTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF0636681EA5B63C002802A8 /* UberRideTableViewCell.xib */; };
 		CFA8B8761E91CF40006BE80E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8751E91CF40006BE80E /* main.m */; };
 		CFA8B8791E91CF40006BE80E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B8781E91CF40006BE80E /* AppDelegate.m */; };
 		CFA8B87C1E91CF40006BE80E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA8B87B1E91CF40006BE80E /* ViewController.m */; };
@@ -40,6 +43,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF0636601EA5AD81002802A8 /* Privy Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Privy Icon.png"; sourceTree = "<group>"; };
+		CF0636661EA5B63C002802A8 /* UberRideTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UberRideTableViewCell.h; sourceTree = "<group>"; };
+		CF0636671EA5B63C002802A8 /* UberRideTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UberRideTableViewCell.m; sourceTree = "<group>"; };
+		CF0636681EA5B63C002802A8 /* UberRideTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UberRideTableViewCell.xib; sourceTree = "<group>"; };
 		CFA8B8711E91CF40006BE80E /* Privy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Privy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFA8B8751E91CF40006BE80E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CFA8B8771E91CF40006BE80E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -135,6 +142,7 @@
 		CFA8B8741E91CF40006BE80E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CF0636601EA5AD81002802A8 /* Privy Icon.png */,
 				CFA8B8751E91CF40006BE80E /* main.m */,
 			);
 			name = "Supporting Files";
@@ -179,6 +187,9 @@
 			children = (
 				CFA8B8AC1E91DD15006BE80E /* RideServiceCollectionViewCell.h */,
 				CFA8B8AD1E91DD15006BE80E /* RideServiceCollectionViewCell.m */,
+				CF0636661EA5B63C002802A8 /* UberRideTableViewCell.h */,
+				CF0636671EA5B63C002802A8 /* UberRideTableViewCell.m */,
+				CF0636681EA5B63C002802A8 /* UberRideTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -292,9 +303,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF0636611EA5AD81002802A8 /* Privy Icon.png in Resources */,
 				CFA8B8841E91CF40006BE80E /* LaunchScreen.storyboard in Resources */,
 				CFA8B8811E91CF40006BE80E /* Assets.xcassets in Resources */,
 				CFA8B87F1E91CF40006BE80E /* Main.storyboard in Resources */,
+				CF06366A1EA5B63C002802A8 /* UberRideTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF0636691EA5B63C002802A8 /* UberRideTableViewCell.m in Sources */,
 				CFA8B8B11E91EA91006BE80E /* UberModel.m in Sources */,
 				CFA8B87C1E91CF40006BE80E /* ViewController.m in Sources */,
 				CFA8B8BA1E98377B006BE80E /* RideResponseModel.m in Sources */,
@@ -564,6 +578,7 @@
 				CFA8B8A01E91CF40006BE80E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CFA8B8A11E91CF40006BE80E /* Build configuration list for PBXNativeTarget "PrivyTests" */ = {
 			isa = XCConfigurationList;
@@ -572,6 +587,7 @@
 				CFA8B8A31E91CF40006BE80E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CFA8B8A41E91CF40006BE80E /* Build configuration list for PBXNativeTarget "PrivyUITests" */ = {
 			isa = XCConfigurationList;
@@ -580,6 +596,7 @@
 				CFA8B8A61E91CF40006BE80E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

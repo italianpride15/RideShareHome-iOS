@@ -9,13 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @class UserModel;
+@class RideResponseModel;
 
 @protocol RideShareModelsProtocol <NSObject>
 
 @required
-- (NSArray *)availableRidesFromLowestPrice;
+- (NSArray<RideResponseModel *> *)availableRidesFromLowestPrice;
 - (NSUInteger)numberOfAvailableServices;
 + (NSString *)getRequestStringForUser:(UserModel *)user;
 + (NSString *)authorizationToken;
+- (NSString *)deepLinkURL;
 
 @end

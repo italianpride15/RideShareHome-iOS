@@ -12,15 +12,18 @@
 #import "LyftModel.h"
 #import "UserModel.h"
 #import "RideServiceCollectionViewCell.h"
+#import "RideResponseModel.h"
+
 #import <CoreLocation/CoreLocation.h>
 
 static NSString * const kRideServiceCollectionViewCellReuseId = @"rideServiceCollectionViewCellReuseId";
 
 static void * UserModelContext = &UserModelContext;
 
-@interface ViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, CLLocationManagerDelegate>
+@interface ViewController () <UISearchBarDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (strong, nonatomic) UserModel *user;
 @property (strong, nonatomic) NSMutableArray<RideShareModelsProtocol> *models;
@@ -33,6 +36,7 @@ static void * UserModelContext = &UserModelContext;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.searchBar.delegate = self;
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
@@ -93,11 +97,19 @@ static void * UserModelContext = &UserModelContext;
                                               [weakSelf handleError:error];
                                           } else {
                                               NSDictionary * json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                              LyftModel *lyftModel = [[LyftModel alloc] initWithResponse:json];
+                                              LyftModel *lyftModel = [[LyftModel alloc] initWithResponse:json andUserModel:weakSelf.user];
                                               [weakSelf.models addObject:lyftModel];
                                           }
                                           
                                           if ([weakSelf.models count] > 0) {
+                                              
+                                              double lowestPriceOne = [[[[weakSelf.models firstObject] availableRidesFromLowestPrice] firstObject].estimatedCost doubleValue];
+                                              
+                                              double lowestPriceTwo = [[[[weakSelf.models lastObject] availableRidesFromLowestPrice] firstObject].estimatedCost doubleValue];
+                                              
+                                              if (lowestPriceTwo < lowestPriceOne) {
+                                                  [weakSelf.models exchangeObjectAtIndex:0 withObjectAtIndex:1];
+                                              }
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   [weakSelf.collectionView reloadData];
                                               });
@@ -119,7 +131,7 @@ static void * UserModelContext = &UserModelContext;
                                                   [weakSelf handleError:error];
                                               } else {
                                                   NSDictionary * json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                                  UberModel *uberModel = [[UberModel alloc] initWithResponse:json];
+                                                  UberModel *uberModel = [[UberModel alloc] initWithResponse:json andUserModel:weakSelf.user];
                                                   [weakSelf.models addObject:uberModel];
                                               }
                                           
@@ -131,6 +143,18 @@ static void * UserModelContext = &UserModelContext;
 - (void)handleError:(NSError *)error {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Unable to complete action." preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:searchText completionHandler:^(NSArray* placemarks, NSError* error) {
+        for (CLPlacemark* placemark in placemarks) {
+            
+        }
+    }];
+    
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -147,9 +171,9 @@ static void * UserModelContext = &UserModelContext;
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(self.collectionView.frame.size.width, 275);
+}
 
 #pragma mark - KVO
 

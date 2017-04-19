@@ -14,5 +14,6 @@
 @property (copy, nonatomic) NSString *rideName;
 @property (copy, nonatomic) NSNumber *estimatedCost;
 @property (copy, nonatomic) NSString *multiplier;
+@property (copy, nonatomic) NSString *serviceName;
 
 @end
