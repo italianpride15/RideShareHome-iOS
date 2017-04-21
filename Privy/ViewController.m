@@ -22,7 +22,7 @@ static NSString * const kSearchResultsTableViewCellReuseId = @"searchResultsTabl
 
 static void * UserModelContext = &UserModelContext;
 
-@interface ViewController () <UISearchBarDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ViewController () <UISearchBarDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -154,6 +154,12 @@ static void * UserModelContext = &UserModelContext;
     RideServiceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kRideServiceCollectionViewCellReuseId forIndexPath:indexPath];
     [cell configureCellForRideShareModel:[self.models objectAtIndex:indexPath.row]];
     return cell;
+}
+
+#pragma mark - UICollectionViewDelegate
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
