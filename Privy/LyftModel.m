@@ -13,7 +13,7 @@
 static NSString * const kLyftBaseUrl = @"https://api.lyft.com/v1/cost?";
 static NSString * const kLyftServerToken = @"gAAAAABXvLCSlzBKw2FIZwCKQoddWym8pl4IcJniHCtO2MRAE8Wc9X91Cs5ChDBrClUEiZ8Jbg5bWRl4BwnFuWtd4a6VNGmu9AXjNFiwXx8MZ1JPN1OLhMLx7_n5wR_uPXG4NqThvIl-bj6JLBiGjynxT1_eofVj26KWjnxwyNSS-foXFluHbXc=";
 static NSString * const kLyftClientId = @"1-HcRoLe-9Vd";
-static NSString * const kDeepLinkQuery = @"lyft://ridetype?id=lyft&pickup[latitude]=%@1&pickup[longitude]=%@2&destination[latitude]=%@3&destination[longitude]=-%@4";
+static NSString * const kDeepLinkQuery = @"lyft://?clientId=1-HcRoLe-9Vd&ridetype?id=%@&pickup[latitude]=%@&pickup[longitude]=%@&destination[latitude]=%@&destination[longitude]=%@";
 
 @interface LyftModel ()
 
@@ -47,7 +47,7 @@ static NSString * const kDeepLinkQuery = @"lyft://ridetype?id=lyft&pickup[latitu
         NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
         _rides = [sortedArray sortedArrayUsingDescriptors:sortDescriptors];
         
-        _deepLinkQuery = [NSString stringWithFormat:kDeepLinkQuery, user.currentLatitude, user.currentLongitude, user.destinationLatitude, user.destinationLongitude];
+        _deepLinkQuery = [NSString stringWithFormat:kDeepLinkQuery, @"%@", user.currentLatitude, user.currentLongitude, user.destinationLatitude, user.destinationLongitude];
     }
     return self;
 }

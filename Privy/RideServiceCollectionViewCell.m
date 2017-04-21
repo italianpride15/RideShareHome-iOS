@@ -82,22 +82,27 @@ static NSString * kRideShareModelTableViewCellReuseId = @"rideShareModelTableVie
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     RideResponseModel *ride = [self.model.availableRidesFromLowestPrice objectAtIndex:indexPath.row];
     
-    NSString *deepLinkService = nil;
-    if ([ride.serviceName containsString:@"uber"]) {
-        deepLinkService = @"uber://";
-    } else {
-        deepLinkService = @"lyft://";
+    NSString *deepLinkService = [self.model deepLinkURL];
+    
+    if ([ride.serviceName containsString:@"lyft"]) {
+        deepLinkService = [NSString stringWithFormat:deepLinkService, ride.rideType];
     }
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:deepLinkService]]) {
-        [self open:[self.model deepLinkURL]];
+        [self open:deepLinkService];
     } else {
         // do nothing
     }
+    
+    //reset selected state
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.selected = NO;
 }
 
 - (void)open:(NSString *)scheme {

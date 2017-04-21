@@ -15,12 +15,14 @@
 #import "RideResponseModel.h"
 
 #import <CoreLocation/CoreLocation.h>
+//#import <MapKit/MapKit.h>
 
 static NSString * const kRideServiceCollectionViewCellReuseId = @"rideServiceCollectionViewCellReuseId";
+static NSString * const kSearchResultsTableViewCellReuseId = @"searchResultsTableViewCellReuseId";
 
 static void * UserModelContext = &UserModelContext;
 
-@interface ViewController () <UISearchBarDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, CLLocationManagerDelegate>
+@interface ViewController () <UISearchBarDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -30,15 +32,22 @@ static void * UserModelContext = &UserModelContext;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
+@property (weak, nonatomic) IBOutlet UITableView *searchResultsTableView;
+@property (strong, nonatomic) NSArray<CLPlacemark *> *placemarks;
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.searchBar.delegate = self;
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    
+    self.searchBar.delegate = self;
+    self.searchResultsTableView.delegate = self;
+    self.searchResultsTableView.dataSource = self;
+    self.searchResultsTableView.estimatedRowHeight = 80;
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -52,8 +61,6 @@ static void * UserModelContext = &UserModelContext;
     [self.user addObserver:self forKeyPath:NSStringFromSelector(@selector(currentLongitude)) options:0 context:UserModelContext];
 //    [self.user addObserver:self forKeyPath:NSStringFromSelector(@selector(destinationLatitude)) options:0 context:UserModelContext];
     [self.user addObserver:self forKeyPath:NSStringFromSelector(@selector(destinationLongitude)) options:0 context:UserModelContext];
-    
-    [self updateUserDestinationAddress];
 }
 
 - (void)dealloc {
@@ -65,20 +72,9 @@ static void * UserModelContext = &UserModelContext;
     } @catch (NSException * __unused exception){}
 }
 
-- (void)updateUserDestinationAddress {
-//    self.user.destinationLatitude = @"37.7816977";
-//    self.user.destinationLongitude = @"-122.410014";
-    
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:@"28 6th St, San Francisco, CA 94103" completionHandler:^(NSArray* placemarks, NSError* error) {
-        for (CLPlacemark* placemark in placemarks) {
-            self.user.destinationLatitude = [NSString stringWithFormat:@"%.4f", placemark.location.coordinate.latitude];
-            self.user.destinationLongitude = [NSString stringWithFormat:@"%.4f", placemark.location.coordinate.longitude];
-        }
-    }];
-}
-
 - (void)makeRideShareDataRequestsForUser {
+    
+    [self.models removeAllObjects];
     
     __weak typeof(self) weakSelf = self;
     
@@ -142,19 +138,10 @@ static void * UserModelContext = &UserModelContext;
 
 - (void)handleError:(NSError *)error {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Unable to complete action." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]];
     [self presentViewController:alert animated:YES completion:nil];
-}
-
-#pragma mark - UISearchBarDelegate
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:searchText completionHandler:^(NSArray* placemarks, NSError* error) {
-        for (CLPlacemark* placemark in placemarks) {
-            
-        }
-    }];
-    
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -186,6 +173,8 @@ static void * UserModelContext = &UserModelContext;
         
         if ([self.user isModelComplete]) {
             [self makeRideShareDataRequestsForUser];
+            [self.searchResultsTableView setHidden:YES];
+            [self.collectionView setHidden:NO];
         }
     }
 }
@@ -198,6 +187,85 @@ static void * UserModelContext = &UserModelContext;
         self.user.currentLatitude = [[NSNumber numberWithDouble:currentLocation.coordinate.latitude] stringValue];
         self.user.currentLongitude = [[NSNumber numberWithDouble:currentLocation.coordinate.longitude] stringValue];
     }
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [self.searchResultsTableView setHidden:NO];
+    [self.collectionView setHidden:YES];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self fetchAddressResultsWithString:searchText];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self fetchAddressResultsWithString:searchBar.text];
+}
+
+- (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar {
+    [self fetchAddressResultsWithString:searchBar.text];
+}
+
+- (void)fetchAddressResultsWithString:(NSString *)searchText {
+//    NSMutableArray<CLPlacemark *> *placemarks = [[NSMutableArray alloc] init];
+//    
+//    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
+//    request.naturalLanguageQuery = searchText;
+//    
+//    MKLocalSearch *localsearch = [[MKLocalSearch alloc] initWithRequest:request];
+//    [localsearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
+//        
+//        for (MKMapItem *item in response.mapItems) {
+//            [placemarks addObject:item.placemark];
+//        }
+//        
+//        if (error && ![searchText isEqualToString:@""]) {
+//            [self handleError:error];
+//        } else {
+//            self.placemarks = placemarks;
+//            [self.searchResultsTableView reloadData];
+//        }
+//    }];
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:searchText completionHandler:^(NSArray* placemarks, NSError* error) {
+        
+        if (error && ![searchText isEqualToString:@""]) {
+            [self handleError:error];
+        } else {
+            self.placemarks = placemarks;
+            [self.searchResultsTableView reloadData];
+        }
+    }];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.placemarks count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSearchResultsTableViewCellReuseId forIndexPath:indexPath];
+    CLPlacemark * placemark = [self.placemarks objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", placemark.name, placemark.locality];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *address = @"%@1, %@2 %@3, %@4, %@5 %@6";
+    
+    CLPlacemark *placemark = [self.placemarks objectAtIndex:indexPath.row];
+    
+    self.user.address = [NSString stringWithFormat:address, placemark.name, placemark.subThoroughfare, placemark.thoroughfare, placemark.locality, placemark.administrativeArea, placemark.postalCode];
+    self.user.destinationLatitude = [NSString stringWithFormat:@"%.4f", placemark.location.coordinate.latitude];
+    self.user.destinationLongitude = [NSString stringWithFormat:@"%.4f", placemark.location.coordinate.longitude];
+    
+    [self.searchBar resignFirstResponder];
 }
 
 #pragma mark - Lazy Loaded Properties
@@ -215,6 +283,5 @@ static void * UserModelContext = &UserModelContext;
     }
     return _user;
 }
-
 
 @end

@@ -13,7 +13,7 @@
 static NSString * const kUberClientId = @"XikKX8YmAoiTaE4PxmvKK2xImKtMFKIG";
 static NSString * const kUberServerToken = @"p4xGiso2Lt5slHGTHSg9fHRgJMT0OUmsn5ksrJw3";
 static NSString * const kUberBaseUrl = @"https://api.uber.com/v1.2/estimates/price?";
-static NSString * const kDeepLinkQuery = @"uber://?client_id=XikKX8YmAoiTaE4PxmvKK2xImKtMFKIG&action=setPickup&pickup[latitude]=%@1&pickup[longitude]=%@2&dropoff[latitude]=%@3&dropoff[longitude]=%@4&dropoff[formatted_address]=%@5";
+static NSString * const kDeepLinkQuery = @"uber://?client_id=XikKX8YmAoiTaE4PxmvKK2xImKtMFKIG&action=setPickup&pickup=my_location&dropoff[latitude]=%@&dropoff[longitude]=%@&dropoff[nickname]=Destination";//&dropoff[formatted_address]=%@3";
 
 @interface UberModel ()
 
@@ -47,7 +47,7 @@ static NSString * const kDeepLinkQuery = @"uber://?client_id=XikKX8YmAoiTaE4Pxmv
         NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
         _rides = [sortedArray sortedArrayUsingDescriptors:sortDescriptors];
         
-        _deepLinkQuery = [NSString stringWithFormat:kDeepLinkQuery, user.currentLatitude, user.currentLongitude, user.destinationLatitude, user.destinationLongitude, user.address];
+        _deepLinkQuery = [NSString stringWithFormat:kDeepLinkQuery, user.destinationLatitude, user.destinationLongitude];
     }
     return self;
 }
