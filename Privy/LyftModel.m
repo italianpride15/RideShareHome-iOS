@@ -13,7 +13,7 @@
 static NSString * const kLyftBaseUrl = @"https://api.lyft.com/v1/cost?";
 static NSString * const kLyftServerToken = @"gAAAAABXvLCSlzBKw2FIZwCKQoddWym8pl4IcJniHCtO2MRAE8Wc9X91Cs5ChDBrClUEiZ8Jbg5bWRl4BwnFuWtd4a6VNGmu9AXjNFiwXx8MZ1JPN1OLhMLx7_n5wR_uPXG4NqThvIl-bj6JLBiGjynxT1_eofVj26KWjnxwyNSS-foXFluHbXc=";
 static NSString * const kLyftClientId = @"1-HcRoLe-9Vd";
-static NSString * const kDeepLinkQuery = @"lyft://?clientId=1-HcRoLe-9Vd&ridetype?id=%@&pickup[latitude]=%@&pickup[longitude]=%@&destination[latitude]=%@&destination[longitude]=%@";
+static NSString * const kDeepLinkQuery = @"lyft://ridetype?id=%@&pickup[latitude]=%@&pickup[longitude]=%@&destination[latitude]=%@&destination[longitude]=%@?clientId=1-HcRoLe-9Vd";
 
 @interface LyftModel ()
 

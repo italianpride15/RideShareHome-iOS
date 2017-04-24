@@ -15,7 +15,7 @@
 #import "RideResponseModel.h"
 
 #import <CoreLocation/CoreLocation.h>
-//#import <MapKit/MapKit.h>
+#import <MapKit/MapKit.h>
 
 static NSString * const kRideServiceCollectionViewCellReuseId = @"rideServiceCollectionViewCellReuseId";
 static NSString * const kSearchResultsTableViewCellReuseId = @"searchResultsTableViewCellReuseId";
@@ -31,9 +31,10 @@ static void * UserModelContext = &UserModelContext;
 @property (strong, nonatomic) NSMutableArray<RideShareModelsProtocol> *models;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (nonatomic, strong) MKLocalSearch *localSearch;
 
 @property (weak, nonatomic) IBOutlet UITableView *searchResultsTableView;
-@property (strong, nonatomic) NSArray<CLPlacemark *> *placemarks;
+@property (strong, nonatomic) NSArray<MKMapItem *> *placemarks;
 
 @end
 
@@ -61,6 +62,11 @@ static void * UserModelContext = &UserModelContext;
     [self.user addObserver:self forKeyPath:NSStringFromSelector(@selector(currentLongitude)) options:0 context:UserModelContext];
 //    [self.user addObserver:self forKeyPath:NSStringFromSelector(@selector(destinationLatitude)) options:0 context:UserModelContext];
     [self.user addObserver:self forKeyPath:NSStringFromSelector(@selector(destinationLongitude)) options:0 context:UserModelContext];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.searchBar becomeFirstResponder];
 }
 
 - (void)dealloc {
@@ -215,62 +221,99 @@ static void * UserModelContext = &UserModelContext;
 }
 
 - (void)fetchAddressResultsWithString:(NSString *)searchText {
-//    NSMutableArray<CLPlacemark *> *placemarks = [[NSMutableArray alloc] init];
-//    
-//    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
-//    request.naturalLanguageQuery = searchText;
-//    
-//    MKLocalSearch *localsearch = [[MKLocalSearch alloc] initWithRequest:request];
-//    [localsearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
-//        
-//        for (MKMapItem *item in response.mapItems) {
-//            [placemarks addObject:item.placemark];
-//        }
-//        
-//        if (error && ![searchText isEqualToString:@""]) {
-//            [self handleError:error];
-//        } else {
-//            self.placemarks = placemarks;
-//            [self.searchResultsTableView reloadData];
-//        }
-//    }];
+    if (self.localSearch.searching)
+    {
+        [self.localSearch cancel];
+    }
     
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:searchText completionHandler:^(NSArray* placemarks, NSError* error) {
-        
-        if (error && ![searchText isEqualToString:@""]) {
-            [self handleError:error];
-        } else {
-            self.placemarks = placemarks;
-            [self.searchResultsTableView reloadData];
-        }
-    }];
+    // Confine the map search area to the user's current location.
+    MKCoordinateRegion newRegion;
+    newRegion.center.latitude = [self.user.currentLatitude doubleValue];
+    newRegion.center.longitude = [self.user.currentLongitude doubleValue];
+    
+    // Setup the area spanned by the map region:
+    // We use the delta values to indicate the desired zoom level of the map,
+    //      (smaller delta values corresponding to a higher zoom level).
+    //      The numbers used here correspond to a roughly 8 mi
+    //      diameter area.
+    //
+    newRegion.span.latitudeDelta = 0.112872;
+    newRegion.span.longitudeDelta = 0.109863;
+    
+    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
+    
+    request.naturalLanguageQuery = searchText;
+    request.region = newRegion;
+    
+    MKLocalSearchCompletionHandler completionHandler = ^(MKLocalSearchResponse *response, NSError *error) {
+        self.placemarks = [response mapItems];
+        [self.searchResultsTableView reloadData];
+    };
+    
+    if (self.localSearch != nil) {
+        self.localSearch = nil;
+    }
+    self.localSearch = [[MKLocalSearch alloc] initWithRequest:request];
+    
+    [self.localSearch startWithCompletionHandler:completionHandler];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.placemarks count];
+    return [self.placemarks count] == 0 ? 0 : 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSearchResultsTableViewCellReuseId forIndexPath:indexPath];
-    CLPlacemark * placemark = [self.placemarks objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", placemark.name, placemark.locality];
+    cell.userInteractionEnabled = YES;
+    
+    if (indexPath.row < [self.placemarks count]) {
+        CLPlacemark * placemark = [self.placemarks objectAtIndex:indexPath.row].placemark;
+        
+        if (placemark.locality && placemark.administrativeArea) {
+            
+            NSString *firstSubstring = [[placemark.name componentsSeparatedByString:@" "] firstObject];
+            
+            static NSCharacterSet * nonDigitsCharacterSet;
+            nonDigitsCharacterSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+            
+            if ([firstSubstring rangeOfCharacterFromSet:nonDigitsCharacterSet].location == NSNotFound)
+            {
+                cell.textLabel.text = [NSString stringWithFormat:@"%@ %@, %@", placemark.name, placemark.locality, placemark.administrativeArea];
+            } else {
+                cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@ %@, %@, %@", placemark.name, placemark.subThoroughfare, placemark.thoroughfare, placemark.locality, placemark.administrativeArea];
+            }
+        } else {
+            cell.textLabel.text = placemark.name;
+        }
+    } else {
+        cell.textLabel.text = @"";
+        cell.userInteractionEnabled = NO;
+    }
+
     return cell;
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[[NSBundle mainBundle] loadNibNamed:@"SearchResultsFooter" owner:self options:nil] firstObject];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 250;
+}
+
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *address = @"%@1, %@2 %@3, %@4, %@5 %@6";
+    CLPlacemark *placemark = [self.placemarks objectAtIndex:indexPath.row].placemark;
     
-    CLPlacemark *placemark = [self.placemarks objectAtIndex:indexPath.row];
-    
-    self.user.address = [NSString stringWithFormat:address, placemark.name, placemark.subThoroughfare, placemark.thoroughfare, placemark.locality, placemark.administrativeArea, placemark.postalCode];
+    self.user.address = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
     self.user.destinationLatitude = [NSString stringWithFormat:@"%.4f", placemark.location.coordinate.latitude];
     self.user.destinationLongitude = [NSString stringWithFormat:@"%.4f", placemark.location.coordinate.longitude];
     
+    self.searchBar.text = self.user.address;
     [self.searchBar resignFirstResponder];
 }
 
